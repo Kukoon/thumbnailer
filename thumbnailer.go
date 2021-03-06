@@ -209,10 +209,10 @@ func makePreview(file string) {
 // cleanUp cleans the working directory off of the tmp files that have been
 // created
 func cleanUp() {
-	//err := os.Remove("concat.mp4")
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
+	err := os.Remove("concat.mp4")
+	if err != nil {
+		log.Fatal(err)
+	}
 	err := os.Remove("segment_files.txt")
 	if err != nil {
 		log.Fatal(err)

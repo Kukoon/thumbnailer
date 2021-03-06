@@ -213,7 +213,7 @@ func cleanUp() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err := os.Remove("segment_files.txt")
+	err = os.Remove("segment_files.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

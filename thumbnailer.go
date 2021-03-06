@@ -145,7 +145,7 @@ func concatSegments() {
 }
 
 // quarterSegments iterates over all segments in current dir
-// cuts them in half (2s) and saves them as half_segments
+// shortens segments to 2s and saves them as quarter_segments
 // cleans up the old segments
 func quarterSegments() {
 	var files []string

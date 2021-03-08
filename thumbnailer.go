@@ -78,13 +78,12 @@ func makePreview(file string) {
 	ext := filepath.Ext(file)
 	name := file[0 : len(file)-len(ext)]
 
-	args := []string{"-y", "-i", "concat:" + list, "-vcodec", "libwebp", "-loop", "0", "-preset", "default", "-an", "-vsync", "0", "-vf", "scale=480:-1", name + "_preview.webp"}
+	args := []string{"-y", "-i", "concat:" + list, "-an", "-vcodec", "libwebp", "-loop", "0", "-preset", "picture", "-vf", "fps=6,scale=480:-1:flags=lanczos", "-qscale", "40", "-compression_level", "6", name + "_preview.webp"}
 	cmd := exec.Command("ffmpeg", args...)
 	err := cmd.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	for _, f := range files {
 		if err := os.Remove(f); err != nil {
 			log.Fatal(err)

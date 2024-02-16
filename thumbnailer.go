@@ -13,9 +13,9 @@ import (
 
 var file string = os.Args[1]
 
-// getTimeStamps returns four time times at 20, 40, 60 and 80% of a given
-// video file in the form of an array of type time.Duration
-func getTimeStamps(file string) []time.Duration {
+// timeStamps returns four timeStamps at 20, 40, 60 and 80% of a given
+// video file as a slice of time.Duration
+func timeStamps(file string) []time.Duration {
 	var stampAt = [4]float64{0.2, 0.4, 0.6, 0.8}
 	var timeStamps []time.Duration
 
@@ -35,15 +35,15 @@ func getTimeStamps(file string) []time.Duration {
 	return timeStamps
 }
 
-// generateSegments cuts a given file at the time times returned by
-// getTimeStamps and writes the results into the current directory
+// generateSegments cuts a given file at the timeStamps
+// and writes the results into the current directory
 func generateSegments(file string) (result []string) {
-	times := getTimeStamps(file)
+	ts := timeStamps(file)
 	segmentDuration := "2"
 	ext := filepath.Ext(file)
 	name := file[0 : len(file)-len(ext)]
 
-	for i, t := range times {
+	for i, t := range ts {
 		filename := fmt.Sprintf("%s_segment_%d%s", name, i, ext)
 		args := []string{"-y", "-i", file, "-ss", strconv.FormatFloat(t.Seconds(), 'f', 0, 64), "-t", segmentDuration, "-map", "0:v:0", "-vcodec", "copy", filename}
 		cmd := exec.Command("ffmpeg", args...)
